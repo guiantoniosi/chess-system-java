@@ -76,6 +76,8 @@ public class ChessMatch {
 			throw new ChessException("You can´t yourself in check");
 		}
 		
+		ChessPiece movedPiece = (ChessPiece)board.piece(target);
+		
 		check = (testCheck(opponent(currentPlayer))) ? true : false;
 		
 		if (testCheckMate(opponent(currentPlayer))) {
@@ -166,7 +168,7 @@ public class ChessMatch {
 		if (!testCheck(color)) {
 			return false;
 		}
-		List<Piece> list = piecesOnTheBoard.stream().filter(x -> ((ChessPiece)x).getColor() == opponent(color)).collect(Collectors.toList());
+		List<Piece> list = piecesOnTheBoard.stream().filter(x -> ((ChessPiece)x).getColor() == color).collect(Collectors.toList());
 		for (Piece p : list) {
 			boolean[][] mat = p.possibleMoves();
 			for (int i = 0; i < board.getRows(); i++) {
